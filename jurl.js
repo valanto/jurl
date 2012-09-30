@@ -1,10 +1,12 @@
 var jurl = function (b) {
 	var that = this;
-	var queryParameters = [];
 	var url = initialParse(b);
 	
 	that.build = function () {
 		var urlString = url.base;
+		if (url.urlParameters.length > 0) {
+			urlString += "/" + url.urlParameters.join("/");
+		}
 		if (url.queryParameters.length > 0) {
 			var params = [], p;
 			for (p in url.queryParameters) {
@@ -30,14 +32,16 @@ var jurl = function (b) {
 	}
 	
 	function initialParse (b) {
-		var urlRegex = /^(((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/)?(www\.)?([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?)([a-zA-Z0-9\-_\/]*))(\?([a-zA-Z0-9\-_&=]*))?(#([a-zA-Z0-9\-_&=\/]*))?$/;
+		var urlRegex = /^((((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/)?(www\.)?([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?))(\/[a-zA-Z0-9\-_\/]*)?)(\?([a-zA-Z0-9\-_&=]*))?(#([a-zA-Z0-9\-_&=\/]*))?$/;
 		var match = urlRegex.exec(b);
 		if(match < 3){
 			return "";
 		}
+		console.log(match);
 		return {
-			base: match[1],
-			queryParameters: parseQueryParams(match[9])
+			base: match[2],
+			urlParameters: parseUrlParams(match[8]),
+			queryParameters: parseQueryParams(match[10])
 		}
 	}
 	
@@ -55,6 +59,21 @@ var jurl = function (b) {
 				param.value = keyValueSplit[1];
 			}
 			params.push(param);
+		}
+		return params;
+	}
+	
+	function parseUrlParams (urlString) {
+		if (isBlank(urlString)) {
+			return [];
+		}
+		var params = [];
+		var splitParams = urlString.split("/");
+		var s;
+		for (s=0; s < splitParams.length; s+=1) {
+			if(!isBlank(splitParams[s])){				
+				params.push(splitParams[s]);
+			}
 		}
 		return params;
 	}

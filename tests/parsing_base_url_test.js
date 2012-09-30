@@ -5,15 +5,36 @@ test( "Parse http://www.example.org", function() {
 
 test( "Parse http://www.example.org?foo=bar", function() {
 	var url = new jurl("http://www.example.org?foo=bar").build();
-  	ok( url === "http://www.example.org?foo=bar", "example.org should keep it's query parameter" );
+  	ok( url === "http://www.example.org?foo=bar", "example.org should keep it's query parameter: " + url );
 });
 
 test( "Parse http://www.example.org?foo=", function() {
 	var url = new jurl("http://www.example.org?foo=").build();
-  	ok( url === "http://www.example.org?foo", "example.org should keep it's query parameter" );
+  	ok( url === "http://www.example.org?foo", "example.org should keep it's query parameter: " + url );
 });
 
 test( "Parse http://www.example.org?foo", function() {
 	var url = new jurl("http://www.example.org?foo").build();
-  	ok( url === "http://www.example.org?foo", "example.org should keep it's query parameter" );
+  	ok( url === "http://www.example.org?foo", "example.org should keep it's query parameter: " + url );
+});
+
+test( "Parse url params http://www.example.org/foo/bar", function() {
+	var url = new jurl("http://www.example.org/foo/bar").build();
+  	ok( url === "http://www.example.org/foo/bar", "example.org should keep it's parameters: " + url );
+});
+
+test( "Parse url params http://www.example.org/foo/bar/", function() {
+	var url = new jurl("http://www.example.org/foo/bar/").build();
+  	ok( url === "http://www.example.org/foo/bar", "example.org should keep it's parameters: " + url );
+});
+
+
+test( "Parse url param http://www.example.org/foo/bar", function() {
+	var url = new jurl("http://www.example.org/foo").build();
+  	ok( url === "http://www.example.org/foo", "example.org should keep it's parameter: " + url );
+});
+
+test( "Parse complex url with query and url params http://www.example.org/fooz/bar/?foo=bar&boo&m00=true", function() {
+	var url = new jurl("http://www.example.org/fooz/bar/?foo=bar&boo&m00=true").build();
+  	ok( url === "http://www.example.org/fooz/bar?foo=bar&boo&m00=true", "should parse complex url and query params: "+ url );
 });

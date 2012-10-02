@@ -9,27 +9,32 @@ var jurl = function (b) {
 		return that;
 	};
 	
+	that.removeQueryParameter = function(key){
+		if(url.queryParameters.hasOwnProperty(key)){
+			delete url.queryParameters[key];
+		}
+		return that;
+	};
+	
 	that.build = function () {
 		var urlString = url.base;
 		if (url.urlParameters.length > 0) {
 			urlString += "/" + url.urlParameters.join("/");
 		}
-		if (url.queryParameters.length > 0) {
-			var params = [], p;
-			for (p in url.queryParameters) {
-				if (url.queryParameters.hasOwnProperty(p)) {
-					var paramString;
-					var param = url.queryParameters[p];
-					if (!isBlank(param.key)) {
-						paramString = param.key;
-					}
-					if (param.hasOwnProperty("value") && !isBlank(param.value)) {
-						paramString += "=" + param.value;
-					}
-					params.push(paramString);
+		
+		var params = [], p;
+		for (p in url.queryParameters) {
+			if (url.queryParameters.hasOwnProperty(p)) {
+				var paramString = p;
+				var value = url.queryParameters[p];
+				if (!isBlank(value)) {
+					paramString += "=" + value;
 				}
+				params.push(paramString);
 			}
-			urlString += "?" + params.join("&");
+		}
+		if(params.length > 0){
+			urlString += "?" + params.join("&");			
 		}
 		return urlString;
 	};
@@ -44,7 +49,6 @@ var jurl = function (b) {
 		if(match < 3){
 			return "";
 		}
-		console.log(match);
 		return {
 			base: match[2],
 			urlParameters: parseUrlParams(match[8]),
@@ -54,18 +58,17 @@ var jurl = function (b) {
 	
 	function parseQueryParams (queryString) {
 		if (isBlank(queryString)) {
-			return [];
+			return {};
 		}
-		var params = [];
+		var params = {};
 		var splitParams = queryString.split("&");
 		var s;
 		for (s=0; s < splitParams.length; s+=1) {
 			var keyValueSplit = splitParams[s].split("=");
-			var param = { key: keyValueSplit[0]};
+			params[keyValueSplit[0]] = "";
 			if (keyValueSplit.length > 1) {
-				param.value = keyValueSplit[1];
+				params[keyValueSplit[0]] = keyValueSplit[1];
 			}
-			params.push(param);
 		}
 		return params;
 	}

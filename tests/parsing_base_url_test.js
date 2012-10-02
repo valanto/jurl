@@ -48,3 +48,18 @@ test( "Remove url parameter", function() {
 	var url = new jurl("http://www.example.org/foo/bar").removeUrlParameter("foo").build();
   	ok( url === "http://www.example.org/bar", "url parameter foo should be removed: " + url );
 });
+
+test( "Remove query parameter", function() {
+	var url = new jurl("http://www.example.org/foo?foo=bar").removeQueryParameter("foo").build();
+  	ok( url === "http://www.example.org/foo", "query parameter foo should be removed: " + url );
+});
+
+test( "Remove query parameter", function() {
+	var url = new jurl("http://www.example.org/foo?foo=bar&baz=bar").removeQueryParameter("foo").build();
+  	ok( url === "http://www.example.org/foo?baz=bar", "query parameter foo should be removed: " + url );
+});
+
+test( "Remove query parameter", function() {
+	var url = new jurl("http://www.example.org/foo?foo=bar&foo=bar").removeQueryParameter("foo").build();
+  	ok( url === "http://www.example.org/foo", "query parameter foo should be removed: " + url );
+});

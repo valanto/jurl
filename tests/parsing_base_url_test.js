@@ -63,3 +63,14 @@ test( "Remove query parameter", function() {
 	var url = new jurl("http://www.example.org/foo?foo=bar&foo=bar").removeQueryParameter("foo").build();
   	ok( url === "http://www.example.org/foo", "query parameter foo should be removed: " + url );
 });
+
+test( "Add url parameter", function() {
+	var url = new jurl("http://www.example.org/foo").addUrlParameter("foo").build();
+  	ok( url === "http://www.example.org/foo/foo", "url parameter foo should be added: " + url );
+});
+
+test( "Remove url parameter", function() {
+	var url = new jurl("http://www.example.org/foo").addUrlParameter("bar").build();
+  	ok( url === "http://www.example.org/foo/bar", "url parameter bar should be added: " + url );
+});
+

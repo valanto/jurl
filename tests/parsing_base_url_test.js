@@ -38,3 +38,13 @@ test( "Parse complex url with query and url params http://www.example.org/fooz/b
 	var url = new jurl("http://www.example.org/fooz/bar/?foo=bar&boo&m00=true").build();
   	ok( url === "http://www.example.org/fooz/bar?foo=bar&boo&m00=true", "should parse complex url and query params: "+ url );
 });
+
+test( "Remove url parameter", function() {
+	var url = new jurl("http://www.example.org/foo").removeUrlParameter("foo").build();
+  	ok( url === "http://www.example.org", "url parameter foo should be removed: " + url );
+});
+
+test( "Remove url parameter", function() {
+	var url = new jurl("http://www.example.org/foo/bar").removeUrlParameter("foo").build();
+  	ok( url === "http://www.example.org/bar", "url parameter foo should be removed: " + url );
+});

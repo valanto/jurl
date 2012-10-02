@@ -2,6 +2,13 @@ var jurl = function (b) {
 	var that = this;
 	var url = initialParse(b);
 	
+	that.removeUrlParameter = function(key){
+		if(url.urlParameters.indexOf(key) > -1){
+			url.urlParameters.splice(url.urlParameters.indexOf(key), 1);
+		}
+		return that;
+	};
+	
 	that.build = function () {
 		var urlString = url.base;
 		if (url.urlParameters.length > 0) {

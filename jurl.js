@@ -9,6 +9,17 @@ var jurl = function (b) {
 		return that;
 	};
 	
+	that.setQueryParameter = function(key, value){
+		if(!isBlank(key)){
+			url.queryParameters[key] = "";
+			if(!isBlank(value)){
+				url.queryParameters[key] = value;
+			}
+		}
+		
+		return that;
+	}
+	
 	that.removeUrlParameter = function(key){
 		if(url.urlParameters.indexOf(key) > -1){
 			url.urlParameters.splice(url.urlParameters.indexOf(key), 1);
@@ -47,7 +58,7 @@ var jurl = function (b) {
 	};
 	
 	function isBlank (string) {
-		return (string === null) || (typeof (string) === "undefined")  || (string === "");
+		return (string === null) || (typeof (string) === "undefined")  || (string.replace(/(^\s*)|(\s*$)/g, "") === "");
 	}
 	
 	function initialParse (b) {

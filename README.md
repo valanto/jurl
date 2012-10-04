@@ -22,40 +22,40 @@ Methods
 
 Examples
 ========
-	Parsing a URL
-	-------------
+Parsing a URL
+-------------
 	new jurl("http://www.example.org?foo=bar").build();	
-	> http://www.example.org?foo=bar
+> http://www.example.org?foo=bar
 	
-	Adding URL parameter
-	--------------------
+Adding URL parameter
+--------------------
 	new jurl("http://www.example.org?foo=bar").addUrlParameter("foo").build();	
-	> http://www.example.org/foo?foo=bar
-	
-	Removing a URL parameter
-	------------------------
+> http://www.example.org/foo?foo=bar
+
+Removing a URL parameter
+------------------------
 	new jurl("http://www.example.org/foo/bar").removeUrlParameter("foo").build();
-	> http://www.example.org/bar
+> http://www.example.org/bar
 	
-	Setting a query parameter
-	-------------------------
+Setting a query parameter
+-------------------------
 	new jurl("http://www.example.org/foo").setQueryParameter("foo", "bar").build();
-	> http://www.example.org/foo?foo=bar
+> http://www.example.org/foo?foo=bar
 	
-	Removing a query parameter
-	--------------------------
+Removing a query parameter
+--------------------------
 	new jurl("http://www.example.org/foo?foo=bar").removeQueryParameter("foo").build();
-	> http://www.example.org/foo
+> http://www.example.org/foo
 	
-	Chaining all
-	------------
+Chaining all
+------------
 	new jurl("http://www.example.org/foo?foo=bar")
 		.addUrlParameter("m00")
 		.removeUrlParameter("m00")
 		.removeQueryParameter("foo")
 		.setQueryParameter("baz", "bar")
 		.build();
-	> http://www.example.org/foo?baz=bar
+> http://www.example.org/foo?baz=bar
 	
 	
 	

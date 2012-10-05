@@ -33,6 +33,21 @@ test( "Remove query parameter", function() {
   	ok( url === "http://www.example.org/foo", "query parameter foo should be removed: " + url );
 });
 
+test( "Get query parameter for valid key", function() {
+	var url = new jurl("http://www.example.org/foo?foo=bar&fooz=m00");
+  	ok( url.getQueryParameter("fooz") === "m00", "query parameter should be found: " + url.build() );
+});
+
+test( "Not get query parameter for invalid key", function() {
+	var url = new jurl("http://www.example.org/foo?foo=bar&fooz=m00");
+  	ok( url.getQueryParameter("f00zy") === null, "query parameter should notbe found: " + url.build() );
+});
+
+test( "Not get query parameter for no key", function() {
+	var url = new jurl("http://www.example.org/foo?foo=bar&fooz=m00");
+  	ok( url.getQueryParameter() === null, "query parameter should notbe found: " + url.build() );
+});
+
 test( "Chaining various methods", function() {
 	var url = new jurl("http://www.example.org/foo?foo=bar")
 		.addUrlParameter("m00")

@@ -18,7 +18,14 @@ var jurl = function (b) {
 		}
 		
 		return that;
-	}
+	};
+	
+	that.getQueryParameter = function(key){
+		if(isBlank(key) ||!url.queryParameters.hasOwnProperty(key)){
+			return null;
+		}
+		return url.queryParameters[key];
+	};
 	
 	that.removeUrlParameter = function(key){
 		if(url.urlParameters.indexOf(key) > -1){

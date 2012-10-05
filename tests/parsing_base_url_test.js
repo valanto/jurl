@@ -28,7 +28,6 @@ test( "Parse url params http://www.example.org/foo/bar/", function() {
   	ok( url === "http://www.example.org/foo/bar", "example.org should keep it's parameters: " + url );
 });
 
-
 test( "Parse url param http://www.example.org/foo/bar", function() {
 	var url = new jurl("http://www.example.org/foo").build();
   	ok( url === "http://www.example.org/foo", "example.org should keep it's parameter: " + url );

@@ -2,9 +2,15 @@ var jurl = function (b) {
 	var that = this;
 	var url = initialParse(b);
 	
-	that.addUrlParameter = function(key){
+	that.addUrlParameter = function(key, index){
 		if(!isBlank(key)){
-			url.urlParameters.push(key);			
+			if(isBlank(index) && isNaN(index)){
+				url.urlParameters.push(key);							
+			} else {
+				if(index < url.urlParameters.length){
+					url.urlParameters.splice(index, 0, key);					
+				}
+			}
 		}
 		return that;
 	};
@@ -79,6 +85,10 @@ var jurl = function (b) {
 	}
 	
 	function trim(string){
+		if((string === null) || (typeof (string) === "undefined")) {
+			return string;
+		} 
+		string = string + "";
 		return string.replace(/(^\s*)|(\s*$)/g, "");
 	}
 	

@@ -38,7 +38,6 @@ Adding URL parameter
 	new jurl("http://www.example.org?foo=bar").addUrlParameter("foo").build();	
 > http://www.example.org/foo?foo=bar
 
-
 Adding URL parameter at index
 -----------------------------
 	new jurl("http://www.example.org/m00/bar?foo=bar").addUrlParameter("foo", 1).build();	

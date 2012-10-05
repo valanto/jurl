@@ -27,6 +27,16 @@ var jurl = function (b) {
 		return url.queryParameters[key];
 	};
 	
+	that.getParameterIndex = function(key){
+		var p;
+		for(p = 0; p < url.urlParameters.length; p+=1){
+			if(url.urlParameters[p] === key){
+				return p;
+			}
+		}
+		return null;
+	};
+	
 	that.removeUrlParameter = function(key){
 		if(url.urlParameters.indexOf(key) > -1){
 			url.urlParameters.splice(url.urlParameters.indexOf(key), 1);
@@ -65,7 +75,11 @@ var jurl = function (b) {
 	};
 	
 	function isBlank (string) {
-		return (string === null) || (typeof (string) === "undefined")  || (string.replace(/(^\s*)|(\s*$)/g, "") === "");
+		return (string === null) || (typeof (string) === "undefined")  || (trim(string) === "");
+	}
+	
+	function trim(string){
+		return string.replace(/(^\s*)|(\s*$)/g, "");
 	}
 	
 	function initialParse (b) {

@@ -29,8 +29,13 @@ test( "Parse url params http://www.example.org/foo/bar/", function() {
 });
 
 test( "Parse url param http://www.example.org/foo/bar", function() {
-	var url = new jurl("http://www.example.org/foo").build();
-  	ok( url === "http://www.example.org/foo", "example.org should keep it's parameter: " + url );
+	var url = new jurl("http://www.example.org/foo/bar").build();
+  	ok( url === "http://www.example.org/foo/bar", "example.org should keep it's parameter: " + url );
+});
+
+test( "Parse hash param http://www.example.org/foo/bar#m00", function() {
+	var url = new jurl("http://www.example.org/foo/bar#m00").build();
+  	ok( url === "http://www.example.org/foo/bar#m00", "example.org should keep it's hash parameter: " + url );
 });
 
 test( "Parse complex url with query and url params http://www.example.org/fooz/bar/?foo=bar&boo&m00=true", function() {

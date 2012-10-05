@@ -3,6 +3,7 @@ var jurl = function (b) {
 	var url = initialParse(b);
 	
 	that.addUrlParameter = function(key, index){
+		key=trim(key);
 		if(!isBlank(key)){
 			if(isBlank(index) && isNaN(index)){
 				url.urlParameters.push(key);							
@@ -16,17 +17,28 @@ var jurl = function (b) {
 	};
 	
 	that.setQueryParameter = function(key, value){
+		key=trim(key);
 		if(!isBlank(key)){
 			url.queryParameters[key] = "";
 			if(!isBlank(value)){
 				url.queryParameters[key] = value;
 			}
 		}
+		return that;
+	};
+	
+	that.setHashParameter = function(hash){
+		hash=trim(hash);
+		if(isBlank(hash)){
+			url.hashParameter = null;
+		}
+		url.hashParameter=trim(hash);
 		
 		return that;
 	};
 	
 	that.getQueryParameter = function(key){
+		key=trim(key);
 		if(isBlank(key) ||!url.queryParameters.hasOwnProperty(key)){
 			return null;
 		}
@@ -34,6 +46,7 @@ var jurl = function (b) {
 	};
 	
 	that.getParameterIndex = function(key){
+		key=trim(key);
 		var p;
 		for(p = 0; p < url.urlParameters.length; p+=1){
 			if(url.urlParameters[p] === key){
@@ -44,6 +57,7 @@ var jurl = function (b) {
 	};
 	
 	that.removeUrlParameter = function(key){
+		key=trim(key);
 		if(url.urlParameters.indexOf(key) > -1){
 			url.urlParameters.splice(url.urlParameters.indexOf(key), 1);
 		}
@@ -51,6 +65,7 @@ var jurl = function (b) {
 	};
 	
 	that.removeQueryParameter = function(key){
+		key=trim(key);
 		if(url.queryParameters.hasOwnProperty(key)){
 			delete url.queryParameters[key];
 		}
@@ -77,6 +92,11 @@ var jurl = function (b) {
 		if(params.length > 0){
 			urlString += "?" + params.join("&");			
 		}
+		
+		if(!isBlank(url.hashParameter)){
+			urlString += "#" + url.hashParameter;
+		}
+		
 		return urlString;
 	};
 	
@@ -98,10 +118,12 @@ var jurl = function (b) {
 		if(match < 3){
 			return "";
 		}
+		console.log(match);
 		return {
 			base: match[2],
 			urlParameters: parseUrlParams(match[8]),
-			queryParameters: parseQueryParams(match[10])
+			queryParameters: parseQueryParams(match[10]),
+			hashParameter: match[12]
 		}
 	}
 	

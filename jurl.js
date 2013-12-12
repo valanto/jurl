@@ -55,6 +55,10 @@ var jurl = function (b) {
 		}
 		return null;
 	};
+
+	that.getHost = function(key){
+		return url.base;
+	};
 	
 	that.removeUrlParameter = function(key){
 		key=trim(key);
@@ -113,17 +117,16 @@ var jurl = function (b) {
 	}
 	
 	function initialParse (b) {
-		var urlRegex = /^((((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/)?(www\.)?([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?))(\/[a-zA-Z0-9\-_\/]*)?)(\?([a-zA-Z0-9\-_&=]*))?(#([a-zA-Z0-9\-_&=\/]*))?$/;
+		var urlRegex = /^((((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/)?(www\.)?([a-zA-Z0-9\-\.]+(\.[a-zA-Z]{2,3})?(:[a-zA-Z0-9]*)?))(\/[a-zA-Z0-9\-_\/]*)?)(\?([a-zA-Z0-9\-_&=%]*))?(#([a-zA-Z0-9\-_&=\/]*))?$/;
 		var match = urlRegex.exec(b);
 		if(match < 3){
 			return "";
 		}
-		console.log(match);
 		return {
 			base: match[2],
-			urlParameters: parseUrlParams(match[8]),
-			queryParameters: parseQueryParams(match[10]),
-			hashParameter: match[12]
+			urlParameters: parseUrlParams(match[9]),
+			queryParameters: parseQueryParams(match[11]),
+			hashParameter: match[13]
 		}
 	}
 	

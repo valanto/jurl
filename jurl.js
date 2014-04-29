@@ -117,7 +117,7 @@ var jurl = function (b) {
 	}
 	
 	function initialParse (b) {
-		var urlRegex = /^((((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/)?(www\.)?([a-zA-Z0-9\-\.]+(\.[a-zA-Z]{2,3})?(:[a-zA-Z0-9]*)?))(\/[a-zA-Z0-9\-_\/]*)?)(\?([a-zA-Z0-9\-_&=%]*))?(#([a-zA-Z0-9\-_&=\/]*))?$/;
+		var urlRegex = /^((((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp):\/\/)?(www\.)?([a-zA-Z0-9\-\.]+(\.[a-zA-Z]{2,3})?(:[a-zA-Z0-9]*)?))(\/[a-zA-Z0-9\-_\/]*)?)(\?([a-zA-Z0-9\-_&=%.]*))?(#([a-zA-Z0-9\-_&=\/]*))?$/;
 		var match = urlRegex.exec(b);
 		if(match < 3){
 			return "";

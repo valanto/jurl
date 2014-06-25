@@ -36,6 +36,10 @@ var jurl = function (b) {
 		
 		return that;
 	};
+
+	that.getHashParameter = function(){
+		return url.hashParameter;
+	};
 	
 	that.getQueryParameter = function(key){
 		key=trim(key);
